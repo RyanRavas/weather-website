@@ -1,0 +1,196 @@
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    --search-bar-height: 2.7rem;
+    --weather-detail-row-height: 3.5rem;
+    --box-shadow-default: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+body {
+    background-color: #222222;
+}
+.container {
+    background-color: #fff;
+    text-align: center;
+    margin: 20px auto 0;
+    width: 90%;
+    max-width: 700px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+}
+.header {
+    color: dimgrey;
+    padding: 10px 0 10px;
+    font-size: 2.3rem;
+}
+/* search form start */
+.search {
+    width: 80%;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    height: var(--search-bar-height);
+}
+#search-text-box {
+    flex: 1;
+    margin-right: 16px;
+    font-size: 1.2rem;
+    height: var(--search-bar-height);
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--box-shadow-default);
+    overflow: auto;
+}
+.submit-button {
+    background-color: white;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-default);
+    height: var(--search-bar-height);
+    width: var(--search-bar-height);
+    cursor: pointer;
+}
+.submit-button:active {
+    box-shadow: inset 2px 2px 2px rgba(0,0,0, 0.3);
+}
+.submit-button-icon {
+    font-size: 1.2rem;
+    max-height: 1.7em;
+}
+.city-name {
+    font-size: 2.4rem;
+    margin: 20px auto 0;
+    color: #555555;
+    max-width: 80%;
+}
+/* temperature radio buttons start*/
+.temperature-type-wrapper {
+    --font-color-dark: #323232;
+    --font-color-light: #FFF;
+    --bg-color: #fff;
+    --main-color: #323232;
+    position: relative;
+    width: 250px;
+    height: var(--search-bar-height);
+    background-color: var(--bg-color);
+    border-radius: 34px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow-default);
+    margin-right: 16px;
+}
+
+.temperature-type-option {
+    width: 115px;
+    height: 2rem;
+    position: relative;
+}
+
+.temperature-type-input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    appearance: none;
+    cursor: pointer;
+}
+
+.temperature-type-btn {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.temperature-type-span {
+    color: var(--font-color-dark);
+}
+
+.temperature-type-input:checked + .temperature-type-btn {
+    background-color: var(--main-color);
+}
+
+.temperature-type-input:checked + .temperature-type-btn .temperature-type-span {
+    color: var(--font-color-light);
+}
+/* temperature radio buttons end*/
+/* search form end */
+/* temperature display start*/
+.primary-temperature {
+    font-size: 6rem;
+    font-weight: 500;
+    margin: 0;
+}
+.primary-temperature>sup {
+    font-size: 3rem;
+    font-weight: 500;
+}
+.secondary-temperature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+    max-width: 50%;
+    margin: 10px auto 0;
+    font-size: 1.3rem;
+    gap: 5px;
+}
+.feels-like-temperature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+    max-width: 50%;
+    margin: 10px auto 0;
+    font-size: 1.3rem;
+}
+/* temperature display end*/
+/* weather details start*/
+.weather-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto 0;
+    min-height: 12rem;
+    width: 70%;
+}
+.humidity,
+.weather-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.humidity h1,
+.weather-type h1 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+.humidity label,
+.weather-type label {
+    font-size: 1.3rem;
+}
+
+#weather-icon,
+#humidity-icon {
+    margin-top: 10px;
+    max-height: 6rem;
+}
+/* weather details end*/

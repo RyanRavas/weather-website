@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather</title>
+    <link rel="stylesheet" href="../weather-website/css/style.css">
+    <link rel="stylesheet" href="../weather-website/css/main.css">
+    <script defer type="module" src="../weather-website/js/app.js"></script>
+    <!-- google search api -->
+    <script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&libraries=places&callback=initMap"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&v=3.exp&libraries=places"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="header-text">Weather</h1>
+        </header>
+        <form class="search">
+            <input aria-label="city search box" type="text" name="search-text" id="search-text-box" placeholder="Enter City Name: " autofocus autocomplete="false" spellcheck="true">
+            <div class="temperature-type-wrapper">
+                <div class="temperature-type-option">
+                    <input class="temperature-type-input" type="radio" name="temperature-type-btn" value="celsius" checked="" aria-label="option celsius">
+                    <div class="temperature-type-btn">
+                        <span class="temperature-type-span">Celsius</span>
+                    </div>
+                </div>
+                <div class="temperature-type-option">
+                    <input class="temperature-type-input" type="radio" name="temperature-type-btn" value="fahrenheit" aria-label="option fahrenheit">
+                    <div class="temperature-type-btn">
+                        <span class="temperature-type-span">Fahrenheit</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="submit-button">
+                <img src="../weather-website/img/search-icon.webp" alt="search icon" class="submit-button-icon">
+            </button>
+        </form>
+        <div class="weather-details">
+            <div class="city-name">New York</div>
+            <div class="temperature">
+                <div class="primary-temperature">
+                    5&deg;C
+                </div>
+                <div class="feels-like-temperature">
+                    Feels Like: 5&deg;C
+                </div>
+                <div class="secondary-temperature">
+                    <div class="high-temperature">
+                        High: 8&deg;C
+                    </div>
+                    <div class="low-temperature">
+                        Low: -10&deg;C
+                    </div>
+                </div>
+            </div>
+            <div class="weather-detail-row">
+                <div class="weather-type">
+                    <h1 class="weather-type-title">Type of Weather: </h1>
+                    <label class="weather-type-text" for="weather-icon">Cloudy</label>
+                    <img src="../weather-website/img/cloudy.png" alt="weather-icon" id="weather-icon">
+                </div>
+                <div class="humidity">
+                    <h1 class="humidity-text-title">Humidity: </h1>
+                    <label class="humidity-text" for="humidity-icon">80%</label>
+                    <img src="../weather-website/img/water-droplets.png" alt="humidity icon" id="humidity-icon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--google place api script -->
+    <script defer async>
+        const searchInput = document.getElementById('search-text-box');
+        document.addEventListener('DOMContentLoaded', function () {
+            const autocomplete = new google.maps.places.Autocomplete(searchInput, {
+                types: ['geocode']
+            });
+            autocomplete.addListener('place_changed', function () {
+                const near_place = autocomplete.getPlace();
+            });
+        });
+    </script>
+</body>
+
+</html>
