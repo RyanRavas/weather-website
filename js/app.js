@@ -13,6 +13,7 @@ const highTemperature = document.querySelector(".high-temperature");
 const lowTemperature = document.querySelector(".low-temperature");
 const weatherTypeText = document.querySelector(".weather-type-text");
 const humidityText = document.querySelector(".humidity-text");
+const temperatureOption = document.querySelectorAll(".temperature-type-option");
 const celsiusButton = document.querySelector("input[value='celsius']")
 // data measurement system
 let unitType = "metric";
@@ -20,6 +21,8 @@ let unitType = "metric";
 let longitude, latitude;
 // location var if location not in api call
 let countryString = "";
+let weatherData;
+let place;
 // search button click listener
 searchButton.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -28,7 +31,7 @@ searchButton.addEventListener("click", async (e) => {
     } else {
         unitType = "imperial";
     }
-    const weatherData = await getWeatherData(longitude, latitude);
+    weatherData = await getWeatherData(longitude, latitude);
     try {
         countryString = searchText.value;
         loadDataToDOM(weatherData, unitType, countryString);
@@ -36,11 +39,26 @@ searchButton.addEventListener("click", async (e) => {
         alert("Please select location using the drop down menu.");
     }
     console.log(weatherData);
-    // reset variable
-    countryString = "";
+});
+// when user clicks on a temperature unit button
+// change units for all temperature values
+temperatureOption.forEach( (button) => {
+    button.addEventListener("click", async (e) => {
+        if (celsiusButton.checked && unitType === "metric") {
+        //     correct button and unit selected, do nothing
+        } else if (celsiusButton.checked && unitType === "imperial") {
+            unitType = "metric";
+            loadDataToDOM(weatherData, unitType, countryString);
+        } else if (!celsiusButton.checked && unitType === "imperial") {
+        //     correct button and unit selected, nothing
+        } else if (!celsiusButton.checked && unitType === "metric") {
+            unitType = "imperial";
+            loadDataToDOM(weatherData, unitType, countryString);
+        }
+    });
 });
 // initializes Google Maps geocoding function
-google.maps.event.addDomListener(window, "load", initialize);
+window.addEventListener("DOMContentLoaded", initialize);
 // gets latitude and longitude of place
 // uses google autocomplete
 function initialize() {
@@ -48,7 +66,7 @@ function initialize() {
     const autocomplete = new google.maps.places.Autocomplete(address);
     autocomplete.setTypes(["geocode"]);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        const place = autocomplete.getPlace();
+        place = autocomplete.getPlace();
         if (!place.geometry) {
             return;
         }

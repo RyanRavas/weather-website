@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weather</title>
-    <link rel="stylesheet" href="../weather-website/css/style.css">
-    <link rel="stylesheet" href="../weather-website/css/main.css">
-    <script defer type="module" src="../weather-website/js/app.js"></script>
+    <link rel="stylesheet" href="../world-weather-website/css/style.css">
+    <link rel="stylesheet" href="../world-weather-website/css/main.css">
+    <script defer type="module" src="../world-weather-website/js/app.js"></script>
     <!-- google search api -->
     <script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&libraries=places&callback=initMap"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&v=3.exp&libraries=places"></script>
+        defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&v=3.exp&libraries=places"></script>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <button type="submit" class="submit-button">
-                <img src="../weather-website/img/search-icon.webp" alt="search icon" class="submit-button-icon">
+                <img src="../world-weather-website/img/search-icon.webp" alt="search icon" class="submit-button-icon">
             </button>
         </form>
         <div class="weather-details">
@@ -61,28 +61,16 @@
                 <div class="weather-type">
                     <h1 class="weather-type-title">Type of Weather: </h1>
                     <label class="weather-type-text" for="weather-icon">Cloudy</label>
-                    <img src="../weather-website/img/cloudy.png" alt="weather-icon" id="weather-icon">
+                    <img src="../world-weather-website/img/cloudy.png" alt="weather-icon" id="weather-icon">
                 </div>
                 <div class="humidity">
                     <h1 class="humidity-text-title">Humidity: </h1>
                     <label class="humidity-text" for="humidity-icon">80%</label>
-                    <img src="../weather-website/img/water-droplets.png" alt="humidity icon" id="humidity-icon">
+                    <img src="../world-weather-website/img/water-droplets.png" alt="humidity icon" id="humidity-icon">
                 </div>
             </div>
         </div>
     </div>
-    <!--google place api script -->
-    <script defer async>
-        const searchInput = document.getElementById('search-text-box');
-        document.addEventListener('DOMContentLoaded', function () {
-            const autocomplete = new google.maps.places.Autocomplete(searchInput, {
-                types: ['geocode']
-            });
-            autocomplete.addListener('place_changed', function () {
-                const near_place = autocomplete.getPlace();
-            });
-        });
-    </script>
 </body>
 
 </html>
