@@ -21,17 +21,17 @@
         </header>
         <form class="search">
             <input aria-label="city search box" type="text" name="search-text" id="search-text-box" placeholder="Enter City Name: " autofocus autocomplete="false" spellcheck="true">
-            <div class="temperature-type-wrapper">
-                <div class="temperature-type-option">
-                    <input class="temperature-type-input" type="radio" name="temperature-type-btn" value="celsius" checked="" aria-label="option celsius">
-                    <div class="temperature-type-btn">
-                        <span class="temperature-type-span">Celsius</span>
+            <div class="unit-type-wrapper">
+                <div class="unit-type-option">
+                    <input class="unit-type-input" type="radio" name="unit-type-btn" value="metric" checked="checked" aria-label="option metric">
+                    <div class="unit-type-btn">
+                        <span class="unit-type-span">Metric</span>
                     </div>
                 </div>
-                <div class="temperature-type-option">
-                    <input class="temperature-type-input" type="radio" name="temperature-type-btn" value="fahrenheit" aria-label="option fahrenheit">
-                    <div class="temperature-type-btn">
-                        <span class="temperature-type-span">Fahrenheit</span>
+                <div class="unit-type-option">
+                    <input class="unit-type-input" type="radio" name="unit-type-btn" value="imperial" aria-label="option imperial">
+                    <div class="unit-type-btn">
+                        <span class="unit-type-span">Imperial</span>
                     </div>
                 </div>
             </div>
@@ -62,6 +62,11 @@
                     <h1 class="weather-type-title">Type of Weather: </h1>
                     <label class="weather-type-text" for="weather-icon">Cloudy</label>
                     <img src="../world-weather-website/img/cloudy.png" alt="weather-icon" id="weather-icon">
+                </div>
+                <div class="wind">
+                    <h1 class="wind-title">Wind Speed:</h1>
+                    <label class="wind-speed-text" for="wind-icon">30km/h</label>
+                    <img src="../world-weather-website/img/wind-icon.png" alt="wind icon" id="wind-icon">
                 </div>
                 <div class="humidity">
                     <h1 class="humidity-text-title">Humidity: </h1>

@@ -7,9 +7,11 @@
     --weather-detail-row-height: 3.5rem;
     --box-shadow-default: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
 body {
     background-color: #222222;
 }
+
 .container {
     background-color: #fff;
     text-align: center;
@@ -20,11 +22,13 @@ body {
     border: none;
     border-radius: 20px;
 }
-.header {
+
+. .header {
     color: dimgrey;
     padding: 10px 0 10px;
     font-size: 2.3rem;
 }
+
 /* search form start */
 .search {
     width: 80%;
@@ -35,6 +39,7 @@ body {
     font-size: 1.2rem;
     height: var(--search-bar-height);
 }
+
 #search-text-box {
     flex: 1;
     margin-right: 16px;
@@ -47,6 +52,7 @@ body {
     box-shadow: var(--box-shadow-default);
     overflow: auto;
 }
+
 .submit-button {
     background-color: white;
     border: none;
@@ -57,21 +63,25 @@ body {
     width: var(--search-bar-height);
     cursor: pointer;
 }
+
 .submit-button:active {
-    box-shadow: inset 2px 2px 2px rgba(0,0,0, 0.3);
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
+
 .submit-button-icon {
     font-size: 1.2rem;
     max-height: 1.7em;
 }
+
 .city-name {
     font-size: 2.4rem;
     margin: 20px auto 0;
     color: #555555;
     max-width: 80%;
 }
+
 /* temperature radio buttons start*/
-.temperature-type-wrapper {
+.unit-type-wrapper {
     --font-color-dark: #323232;
     --font-color-light: #FFF;
     --bg-color: #fff;
@@ -89,13 +99,13 @@ body {
     margin-right: 16px;
 }
 
-.temperature-type-option {
+.unit-type-option {
     width: 115px;
     height: 2rem;
     position: relative;
 }
 
-.temperature-type-input {
+.unit-type-input {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -105,7 +115,7 @@ body {
     cursor: pointer;
 }
 
-.temperature-type-btn {
+.unit-type-btn {
     width: 100%;
     height: 100%;
     background-color: var(--bg-color);
@@ -115,17 +125,18 @@ body {
     align-items: center;
 }
 
-.temperature-type-span {
+.unit-type-span {
     color: var(--font-color-dark);
 }
 
-.temperature-type-input:checked + .temperature-type-btn {
+.unit-type-input:checked \.unit-type-btn {
     background-color: var(--main-color);
 }
 
-.temperature-type-input:checked + .temperature-type-btn .temperature-type-span {
+.unit-type-input:checked + .unit-type-btn .unit-type-span {
     color: var(--font-color-light);
 }
+
 /* temperature radio buttons end*/
 /* search form end */
 /* temperature display start*/
@@ -134,10 +145,12 @@ body {
     font-weight: 500;
     margin: 0;
 }
+
 .primary-temperature>sup {
     font-size: 3rem;
     font-weight: 500;
 }
+
 .secondary-temperature {
     display: flex;
     justify-content: space-between;
@@ -149,6 +162,7 @@ body {
     font-size: 1.3rem;
     gap: 5px;
 }
+
 .feels-like-temperature {
     display: flex;
     justify-content: center;
@@ -159,6 +173,7 @@ body {
     margin: 10px auto 0;
     font-size: 1.3rem;
 }
+
 /* temperature display end*/
 /* weather details start*/
 .weather-detail-row {
@@ -168,29 +183,37 @@ body {
     text-align: center;
     margin: 20px auto 0;
     min-height: 12rem;
-    width: 70%;
+    width: 80%;
 }
+
 .humidity,
-.weather-type{
+.weather-type,
+.wind {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
 }
+
 .humidity h1,
-.weather-type h1 {
+.weather-type h1,
+.wind h1 {
     font-size: 1.3rem;
     margin-bottom: 10px;
 }
+
 .humidity label,
-.weather-type label {
+.weather-type label,
+.wind label {
     font-size: 1.3rem;
 }
 
 #weather-icon,
-#humidity-icon {
+#humidity-icon,
+#wind-icon {
     margin-top: 10px;
     max-height: 6rem;
 }
+
 /* weather details end*/
