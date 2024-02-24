@@ -106,13 +106,13 @@ function loadDataToDOM(weatherData, unitType, place) {
         feelsLikeTemperature.innerHTML = `Feels Like: ${formatNumber(weatherData.main.feels_like)}&deg;C`
         highTemperature.innerHTML = `High: ${formatNumber(weatherData.main.temp_max)}&deg;C`;
         lowTemperature.innerHTML = `Low: ${formatNumber(weatherData.main.temp_min)}&deg;C`;
-        windText.innerHTML = `Wind Speed: ${formatNumber(weatherData.wind.speed)} km/h`;
+        windText.innerHTML = `${formatNumber(weatherData.wind.speed)} km/h`;
     } else {
         primaryTemperature.innerHTML = `${formatNumber(weatherData.main.temp)}&deg;F`;
         feelsLikeTemperature.innerHTML = `Feels Like: ${formatNumber(weatherData.main.feels_like)}&deg;F`;
         highTemperature.innerHTML = `High: ${formatNumber(weatherData.main.temp_max)}&deg;F`;
         lowTemperature.innerHTML = `Low: ${formatNumber(weatherData.main.temp_min)}&deg;F`;
-        windText.innerHTML = `Wind Speed: ${formatNumber(weatherData.wind.speed)} mi/h`;
+        windText.innerHTML = `${formatNumber(weatherData.wind.speed)} mi/h`;
     }
     cityNameText.innerHTML = `${place.formatted_address}`;
     weatherTypeText.textContent = formatString(weatherData.weather[0].description);
@@ -137,3 +137,12 @@ function formatNumber(temp) {
     // if decimal is 0, doesn't show
     return Math.round(temp * 10) / 10;
 }
+
+// load weather data for toronto by default
+longitude = -79.3839;
+latitude = 43.6535;
+place = {
+    formatted_address: "Toronto, ON, Canada"
+};
+weatherData = await getWeatherData(longitude, latitude);
+loadDataToDOM(weatherData, unitType, place);

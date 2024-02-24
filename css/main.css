@@ -129,7 +129,7 @@ body {
     color: var(--font-color-dark);
 }
 
-.unit-type-input:checked \.unit-type-btn {
+.unit-type-input:checked + .unit-type-btn {
     background-color: var(--main-color);
 }
 
@@ -193,7 +193,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 .humidity h1,
