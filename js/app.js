@@ -14,6 +14,7 @@ const lowTemperature = document.querySelector(".low-temperature");
 const weatherTypeText = document.querySelector(".weather-type-text");
 const humidityText = document.querySelector(".humidity-text");
 const windText = document.querySelector(".wind-speed-text");
+const weatherIcon = document.querySelector("#weather-icon");
 const metricButton = document.querySelector("input[value='metric']");
 const imperialButton = document.querySelector("input[value='imperial']");
 // data measurement system
@@ -142,6 +143,7 @@ function loadDataToDOM(weatherData, unitType, place) {
     }
     cityNameText.innerHTML = `${place.formatted_address}`;
     weatherTypeText.textContent = formatString(weatherData.weather[0].description);
+    weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`)
     humidityText.innerHTML = `${weatherData.main.humidity}%`;
 }
 function formatString(string) {
