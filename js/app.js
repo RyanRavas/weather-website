@@ -3,7 +3,7 @@ import {API_KEY} from "./apiKey.js";
 const apiKey = API_KEY;
 const apiUrl = ("https://api.openweathermap.org/data/2.5/weather?");
 // search form selectors
-const searchButton = document.querySelector(".submit-button");
+const searchForm = document.querySelector(".search");
 const searchText = document.querySelector("#search-text-box");
 // text element selectors
 const cityNameText = document.querySelector(".city-name");
@@ -14,8 +14,8 @@ const lowTemperature = document.querySelector(".low-temperature");
 const weatherTypeText = document.querySelector(".weather-type-text");
 const humidityText = document.querySelector(".humidity-text");
 const windText = document.querySelector(".wind-speed-text");
-const unitOption = document.querySelectorAll(".unit-type-option");
-const metricButton = document.querySelector("input[value='metric']")
+const metricButton = document.querySelector("input[value='metric']");
+const imperialButton = document.querySelector("input[value='imperial']");
 // data measurement system
 let unitType = "metric";
 // longitude and latitude of location
@@ -24,8 +24,8 @@ let longitude, latitude;
 let countryString = "";
 let weatherData;
 let place;
-// search button click listener
-searchButton.addEventListener("click", async (e) => {
+// search form submit listener
+searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (metricButton.checked) {
         unitType = "metric";
@@ -39,29 +39,58 @@ searchButton.addEventListener("click", async (e) => {
     } catch (e) {
         alert("Please select location using the drop down menu.");
     }
-    console.log(weatherData);
+    addWeatherToLocalStorage(longitude, latitude, unitType);
 });
 // when user clicks on a temperature unit button
 // change units for all temperature values
-unitOption.forEach( (button) => {
-    button.addEventListener("click", async () => {
-        if (metricButton.checked && unitType === "metric") {
-        //     correct button and unit selected, do nothing
-        } else if (metricButton.checked && unitType === "imperial") {
-            unitType = "metric"
-            weatherData = await getWeatherData(longitude, latitude);
-            loadDataToDOM(weatherData, unitType, place);
-        } else if (!metricButton.checked && unitType === "imperial") {
-        //     correct button and unit selected, nothing
-        } else if (!metricButton.checked && unitType === "metric") {
-            unitType = "imperial"
-            weatherData = await getWeatherData(longitude, latitude);
-            loadDataToDOM(weatherData, unitType, place);
-        }
-    });
+metricButton.addEventListener("click", async function () {
+    if (metricButton.checked && unitType === "imperial") {
+        unitType = "metric";
+        weatherData = await getWeatherData(longitude, latitude);
+        loadDataToDOM(weatherData, unitType, place);
+    }
+});
+imperialButton.addEventListener("click", async function () {
+    if (imperialButton.checked && unitType === "metric") {
+        unitType = "imperial";
+        weatherData = await getWeatherData(longitude, latitude);
+        loadDataToDOM(weatherData, unitType, place);
+    }
 });
 // initializes Google Maps geocoding function
 window.addEventListener("DOMContentLoaded", initialize);
+// loads previous city's weather if page is reset
+window.addEventListener("DOMContentLoaded", async function () {
+    // if reference does not exist, load data for toronto, ON, Canada as default
+    if (getWeatherDataFromLocalStorage() === null) {
+        // Coordinates for Toronto, ON, Canada
+        longitude = -79.3839;
+        latitude = 43.6535;
+        place = {
+            formatted_address: "Toronto, ON, Canada"
+        };
+        weatherData = await getWeatherData(longitude, latitude);
+        // checks metric radio button, default unit type
+        metricButton.checked = true;
+        loadDataToDOM(weatherData, unitType, place);
+    } else {
+        // parse json from local storage
+        const data = JSON.parse(getWeatherDataFromLocalStorage());
+        weatherData = await getWeatherData(data.longitude, data.latitude);
+        // assigns all required variables from local storage
+        unitType = data.unitType;
+        longitude = data.longitude;
+        latitude = data.latitude;
+        place = data.place;
+        // checks correct radio button based on unit
+        if (unitType === "imperial") {
+            imperialButton.checked = true;
+        } else {
+            metricButton.checked = true;
+        }
+        loadDataToDOM(weatherData, unitType, place);
+    }
+});
 // gets latitude and longitude of place
 // uses google autocomplete
 function initialize() {
@@ -89,7 +118,6 @@ function initialize() {
         /*********************************************************************/
         latitude = place.geometry.location.lat();
         longitude = place.geometry.location.lng();
-        console.log(place);
     });
 }
 // get weather data from api
@@ -99,8 +127,6 @@ async function getWeatherData(longitude, latitude) {
     return await response.json();
 }
 function loadDataToDOM(weatherData, unitType, place) {
-    console.log(weatherData);
-    console.log(unitType);
     if (unitType === "metric") {
         primaryTemperature.innerHTML = `${formatNumber(weatherData.main.temp)}&deg;C`;
         feelsLikeTemperature.innerHTML = `Feels Like: ${formatNumber(weatherData.main.feels_like)}&deg;C`
@@ -121,14 +147,18 @@ function loadDataToDOM(weatherData, unitType, place) {
 function formatString(string) {
     string = string.trim();
     if (string.indexOf(" ") !== -1) {
+        // array of all words
         let array = string.split(" ");
         let result = "";
+        // loop through each word in array
+        // capitalize first letter
         for (let i= 0; i < array.length; i++) {
             let fixedString = array[i].charAt(0).toUpperCase() + array[i].slice(1);
             result += `${fixedString} `;
         }
         return result;
     } else {
+        // capitalize first letter of the only word
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 }
@@ -137,12 +167,17 @@ function formatNumber(temp) {
     // if decimal is 0, doesn't show
     return Math.round(temp * 10) / 10;
 }
-
-// load weather data for toronto by default
-longitude = -79.3839;
-latitude = 43.6535;
-place = {
-    formatted_address: "Toronto, ON, Canada"
-};
-weatherData = await getWeatherData(longitude, latitude);
-loadDataToDOM(weatherData, unitType, place);
+// commit required data to local storage
+function addWeatherToLocalStorage() {
+    const weatherObj = {
+        longitude: longitude,
+        latitude: latitude,
+        place: place,
+        unitType: unitType
+    }
+    localStorage.setItem("weather", JSON.stringify(weatherObj));
+}
+function getWeatherDataFromLocalStorage() {
+    // get obj from local storage
+    return localStorage.getItem("weather");
+}
