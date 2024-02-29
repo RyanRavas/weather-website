@@ -7,11 +7,11 @@
     <title>Weather</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
     <script defer type="module" src="./js/app.js"></script>
-    <!-- google search api -->
-    <script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&libraries=places&callback=initMap"></script>
-    <script
-        defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&v=3.exp&libraries=places"></script>
+    <!-- google places api -->
+    <script defer async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaG0Em3YUHnlY7YnuoOzomO-lXdewipr8&v=3.exp&libraries=places"></script>
 </head>
 
 <body>
@@ -41,6 +41,7 @@
         </form>
         <div class="weather-details">
             <div class="city-name">New York</div>
+            <div class="last-updated">Data Last Updated: 13:23</div>
             <div class="temperature">
                 <div class="primary-temperature">
                     5&deg;C
@@ -58,20 +59,47 @@
                 </div>
             </div>
             <div class="weather-detail-row">
-                <div class="weather-type">
+                <div class="weather-detail-row-item weather-type">
                     <h1 class="weather-type-title">Type of Weather: </h1>
                     <label class="weather-type-text" for="weather-icon">Cloudy</label>
-                    <img src="./img/cloudy.png" alt="weather-icon" id="weather-icon">
+                    <img src="./img/cloudy.png" alt="weather-icon" class="weather-detail-row-img" id="weather-icon">
                 </div>
-                <div class="wind">
+                <div class="weather-detail-row-item wind">
                     <h1 class="wind-title">Wind Speed:</h1>
                     <label class="wind-speed-text" for="wind-icon">30km/h</label>
-                    <img src="./img/wind-icon.png" alt="wind icon" id="wind-icon">
+                    <img src="./img/wind-icon.png" alt="wind icon" class="weather-detail-row-img" id="wind-icon">
                 </div>
-                <div class="humidity">
+                <div class="weather-detail-row-item humidity">
                     <h1 class="humidity-text-title">Humidity: </h1>
                     <label class="humidity-text" for="humidity-icon">80%</label>
-                    <img src="./img/water-droplets.png" alt="humidity icon" id="humidity-icon">
+                    <img src="./img/water-droplets.png" alt="humidity icon" class="weather-detail-row-img"
+                         id="humidity-icon">
+                </div>
+            </div>
+            <div class="weather-detail-row row-2">
+                <div class="sunrise-sunset-wrapper">
+                    <div class="weather-detail-row-item sunrise-wrapper">
+                        <h1 class="sunrise-title">Sunrise Local Time:</h1>
+                        <label class="sunrise-text">5:30</label>
+                        <img src="/img/sunrise.png" alt="Sunrise Icon" class="weather-detail-row-img" id="sunrise-icon">
+                    </div>
+                    <div class="weather-detail-row-item sunset-wrapper">
+                        <h1 class="sunset-title">Sunset Local Time:</h1>
+                        <label class="sunset-text">20:30</label>
+                        <img src="/img/sunset.png" alt="Sunset Icon" class="weather-detail-row-img" id="sunset-icon">
+                    </div>
+                </div>
+                <div class="weather-detail-row-item visibility">
+                    <h1 class="visibility-title">Visibility:</h1>
+                    <label class="visibility-text">10km</label>
+                    <img src="/img/visibility.png" alt="Visibility image" class="weather-detail-row-img"
+                         id="visibility-icon">
+                </div>
+                <div class="weather-detail-row-item precipitation">
+                    <h1 class="precipitation-title">Precipitation</h1>
+                    <label class="precipitation-text">5mm</label>
+                    <img src="/img/precipitation.png" alt="Precipitation Icon" class="weather-detail-row-img"
+                         id="precipitation-icon">
                 </div>
             </div>
         </div>
